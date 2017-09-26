@@ -1,0 +1,130 @@
+DOCUMENTATION [part-1]
+
+            
+TITLE : RESTAURANT MANAGEMENT SYSTEM
+
+Introduction
+Abstract:
+Our main purpose of this project is to create a restaurant management software or system which will save time of both customer and the restaurant management team. On the other hand it will help to run business with much more efficiency than the past and offers more coordination for everyday work.
+The main features of the project include:
+	Organizing  the database for restaurant.
+	Coordinating work activities of various actors.
+	Increasing efficiency by minimizing the time between order is placed and the billing is done.
+	Increasing profits and revenue by increasing the service quality.
+	Archiving information about customer orders, payment details ,inventory details ,furniture, utensils, staff list etc.
+
+Existing model:
+Many restaurants have the traditional pen-paper approach.
+Draw backs of this existing model are:
+	Keeping track of empty tables require either keeping a “dry-erase” diagram of tables or the host constantly keeps track of the status of the tables if it is a small restaurant.
+           dry-erase : A panel covered with white ,glossy plastic for writing with                                                  erasable markers . Also called as dry-erase board/white board.
+	The waiter writes the order on a piece of paper  and has to transfer the same information to the terminal  system .This takes some time and reduces efficiency in peak hours when more customers are expected than in the rest of the day.
+ Also there may not be enough terminals available in the     restaurant as there are number of tables which would require particular waiters to wait until the others are done entering their orders into the system.
+	The chefs couldn’t notify the waiter immediately when the ordered food is cooked and ready to be served.
+	Keeping statistical information such as customer orders, bill payment details is an issue of concern.
+
+Proposed model:
+
+To develop a software system that would eliminate the need of traditional pen-paper approach for restaurants .This model proposes to fully automate such that it is easier to co-ordinate various work activities that go on inside a typical restaurant.
+                                   A touch screen PDA(Personal  digital assistant) is used by staff to log in and complete the desired tasks .Various employees have the user accounts and login using their passwords which they need to remember except for chef.
+ PDA(personal digital assistant): It is a small ,mobile, handheld device that provides computing and information storage and retrieval capabilities for personal/business use.           
+                                    Logging in and logging out will be considered as trigger events for updating and organizing data.
+
+
+
+
+
+
+
+
+
+Actor 	Actions performed
+Host	Opens the door , greets the customer and gives him/her the menu card.
+Assigns and seats people who come to restaurant.
+If the customer has kids (4-7yrs of age),host allows them into kids play zone.
+If the customer has kids(0-3yrs of age),host provides them with special baby chair at their table
+Host notifies the waiter assigned to that particular table.
+Waiter	Checks notifications from host.
+Checks the time (11AM-3PM) if the customer can avail the buffet offer.
+Takes order onto a PDA.
+Sends order details to chefs in the kitchen.
+Checks the notifications from chefs.
+Delivers order to the customer.
+Bills the customer and asks the customer to rate the service on the PDA.
+Sends the bill and rating details of the manager.
+Sends notification to the busboy to clean the table.
+Chefs :3 chefs 
+a)Appetizer/soup chef
+b)Main-course chef
+c)Dessert chef	Reads the order placed from the terminal in the kitchen and cooks food accordingly.
+  Also the cook informs waiter when the order is ready.
+Busboy	Keeps track of dirty tables and update status when cleaning is done.
+Manager	Manages inventory (all the items required for food preparation in restaurants), staff list, furniture ,utensils ,customer bill payment details  so on.
+Take-away staff	Takes order on to the PDA. 
+Sends order details to chefs in the kitchen.
+Checks the notifications from chefs.
+Delivers ordered food package to the customer.
+Bills the customer and asks him to rate the restaurant service on PDA.
+Sends the bill and rating details of customer to the manager.
+Security guard	Park the vehicle if the customer asks for valet parking.
+
+
+
+SYSTEM FLOW:
+
+Customer enters the restaurant premises.
+TAKE-AWAY?
+If the customer wants to take away the food ,he/she goes to the separate counter allotted for take away.
+•	The take-away staff  gives customer menu card and takes order on to the PDA. 
+•	Sends order details to chefs in the kitchen.
+•	The order is seen by the chefs in the kitchen who can right away start preparing the dish.
+•	After the chefs finish cooking the order, the take-away staff is notified.
+•	The take-away staff checks notifications from the chefs.
+•	Delivers ordered food package to the customer.
+•	Bills the customer and asks him to rate the restaurant service on PDA. The order is archived.
+•	Take-away staff sends the bill and rating details of customer to the manager.
+If the customer doesn’t want to take away food, the next question is if he wants to avail the valet parking facility.
+	YES-Customer gives the keys to the security guard to park the vehicle.
+	NO- Customer  doesn’t gives the keys to the security guard to park the vehicle.
+The host opens the door and greets the customer and gives menu card.
+ If the customer has kids (4-7yrs of age),host allows them into kids play zone.
+The host logins on PDA to check empty tables and then directs the customer to the table.
+If the customer has kids(0-3yrs of age),host provides them with special baby chair at their table
+Host notifies the waiter assigned to that particular table.
+The waiter places new plate ,cutlery, water bottle on the table.
+ The waiter checks the time (11AM-3PM) if the customer can avail the buffet offer .There are two cases here
+CASE A: If the buffet offer is there,
+-Customer completes eating  in buffet and orders bill.
+-Waiter bills the customer and asks him to rate the restaurant service on PDA. The order is archived.
+ -Customer pays a fixed amount of bill (7.99$) and rates the restaurant service.
+CASE B:  If the buffet offer is not there,
+-Waiter takes order onto a PDA.
+-Waiter sends order details to chefs in the kitchen. 
+-The order is seen by the chefs in the kitchen who can right away start preparing the dish.
+-After the chefs finish cooking the order, the take-away staff is notified.
+-Waiter checks the notifications from chefs.
+-Waiter delivers order to the customer.
+-Waiter bills the customer and asks the customer to rate the service on the PDA. The order is archived.
+ -Customer pays bill and rates the restaurant service.
+Customer exits.
+Waiter sends the bill and rating details of customer to the manager.
+ Waiter sends notification to the busboy to clean the table.
+Busboy Keeps track of dirty tables and update the table status  as available when cleaning is done.
+
+
+
+
+ASSUMPTIONS:
+1) No tips are accepted in restaurant.
+2) The tax amount is fixed in any bill irrespective of the items ordered(tax is 0.01$).
+3) There are no special charges for valet parking , table reservation ,special baby chair or the kids play zone entrance.
+4) Customer who arrive in between 11AM-3PM avail buffet offer and need to pay fixed amount of bill(7.99$).
+5) There are always enough amount of tables for customers arriving into the  restaurants . The customers are never made to wait for tables.
+6)The restaurant has only one host, one manager , one busboy and one take-away staff at the take-away counter.
+7)The customers come one after other and never at the same time .Also there is sufficient amount of time interval between the arrival of each customer into the restaurant.
+8)The number of waiters is equal to number of chairs in the restaurant.
+9)There are only 3 chefs in the restaurant .They get notifications and send notifications through the terminal present in the kitchen.
+a)Appetizer/Soup chef: prepares only appetizers and soups.
+b)Main-course chef: prepares only main-course dishes(lunch entre’e dishes).
+c)Dessert chef: prepares only deserts.
+10)The chefs are allowed to notify the waiter to deliver the food order only if all the items specified in the order are cooked and ready to be served.
