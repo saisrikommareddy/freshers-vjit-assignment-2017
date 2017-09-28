@@ -1,0 +1,5 @@
+STEPS FOR RUNNING THE JAVA PROGRAM
+
+1)Open the jar file by using the IDE.
+2)Compile the FinalRapp.java .
+3)Run the class FinalRapp
