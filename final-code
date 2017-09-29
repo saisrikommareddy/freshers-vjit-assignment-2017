@@ -1,0 +1,781 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.myfirstmavenproject1;
+
+/**
+ *
+ * @author SaiSri.kommareddy(14911A0579)
+ */
+
+import java.lang.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.sql.*;
+public class FinalRapp extends JFrame implements ActionListener,MouseListener
+{
+       //List of Panels
+    JPanel rp,rp1,rp2,rp3,home,lgn,cst,viewdet,bookprc,seat,bkng,bill,lgnact,thnx;
+	//Compoments Layout
+        GridBagLayout gb;
+	CardLayout cl;
+	GridBagConstraints gbc;
+        //EventHandlers
+	MyWinLis wl;
+	MyFocusLis ff;
+        //ForDatabase Connection
+	Connection con;
+	Statement st;
+       PreparedStatement ps;
+	ResultSet rs;
+        //Seting font Details
+	Font mfnt,mfnt1;
+       
+       //For HomePage Form
+         
+        JButton custb1,hostb2,waitb3,adminb4,ktcb5,busbyb6,lgtb7,bkprc;
+	JLabel htitle,hempt;
+	//For Login Form
+	JLabel uname,pwd,neusr;
+	JTextField ut1,t1,t2;
+	JPasswordField pt2;
+	JButton b1,b2,b3;
+
+        //For Login Account
+        
+        JLabel actlb,actlab1, actuname,actpwd,actcfpwd;
+	JTextField actut1;
+	JPasswordField actpt1,actpt2;
+	JButton actb1,actb2,actb3;
+        
+        
+	//For Customer Form
+	JLabel lempt,cname,phno,address;
+	JTextField ct1,ct2;
+	JTextArea taddr;
+	JButton loginbt,backbt,exitbt;
+
+        //seat arrangement form by host
+        JLabel slabel,slabel1;
+        JComboBox stn,nct,ckinhtr,ckinmin,ckouthtr,ckoutmin;
+        JButton send,cancel,back1;
+
+	//For viewfooddetails Form
+	JTable  ftable;
+	JButton bookord,canclord,back2,SelectItem;
+
+	//For Booking Form
+        JLabel itemname,quantty;
+	JComboBox bitemname,bquantty;
+	JButton bknw,getcst,back3;
+	
+	//For Billing Form
+	  
+         JButton vwbill,prtrcpt,bck4;
+	//Parcel Booking
+         JLabel plabel,plabel1;
+         JLabel pitemname,pquantty;
+	JComboBox pbitemname,pbquantty;
+	JButton pbknw,pgetcst,pback3;
+	
+       //For Finishing Form
+	JLabel l53,l54,l55,l57,l58,l59,l60,l61;
+       //For Thanks form
+        JLabel thnxlab,thnxlab1;
+        
+  //      constructor
+        
+	public FinalRapp()
+	{
+		
+               super(" Easy Restaurent Management System");
+                addMouseListener(this);
+                 rp=new JPanel();
+		rp1=new JPanel();
+		rp2=new JPanel();
+		rp3=new JPanel();
+                home=new JPanel();
+		lgn=new JPanel();
+		cst=new JPanel();
+		viewdet=new JPanel();
+                bookprc=new JPanel();
+                seat=new JPanel();
+		bkng=new JPanel();
+		bill=new JPanel();
+		lgnact=new JPanel();
+                thnx=new JPanel();
+		gb=new GridBagLayout();
+		gbc=new GridBagConstraints();
+		mfnt=new Font("Arial",Font.BOLD,40);
+		mfnt1=new Font("Bold Italic",Font.BOLD,25);
+		Insets ss=new Insets(5,5,5,5);
+		gbc.insets=ss;
+		cl=new CardLayout();
+		rp.setLayout(cl);
+		gbc.fill=GridBagConstraints.BOTH;
+		wl=new MyWinLis();
+		addWindowListener(wl);
+		ff=new MyFocusLis();
+
+		//Initializing labels Objects
+		l53=new JLabel(" Restaurent Management System");
+		l54=new JLabel(" ");
+		l55=new JLabel(" View Food Menu");
+		l57=new JLabel(" ");
+		l58=new JLabel("Customer Details Filling Form");
+		l59=new JLabel(" ");
+		l60=new JLabel("Booking Details Filling Form");
+		l61=new JLabel(" ");
+		l53.setFont(mfnt);
+		l55.setFont(mfnt);
+		l58.setFont(mfnt);
+		l60.setFont(mfnt);
+		//For HomePage Form
+            
+	        //JButton custb1,hostb2,waitb3,adminb4,ktcb5,busbyb6,lgtb7;
+                htitle=new JLabel(" Restaurent Management System");
+                hempt=new JLabel("         ");
+                  htitle.setForeground(Color.GREEN);
+                                  
+                 custb1=new JButton("Customer Services");
+                hostb2=new JButton("Host Login");
+                waitb3=new JButton("Waiter Login");
+                adminb4=new JButton("Admin Login");
+		ktcb5=new JButton("Kitchen master Login");
+                busbyb6=new JButton("Bus Boy Login");
+                bkprc=new JButton("Book Parcel");
+                lgtb7= new JButton("Logut");
+                custb1.addActionListener(this);
+		hostb2.addActionListener(this);
+		waitb3.addActionListener(this);
+                adminb4.addActionListener(this);
+		ktcb5.addActionListener(this);   
+		busbyb6.addActionListener(this);
+                bkprc.addActionListener(this);
+                lgtb7.addActionListener(this);
+                custb1.setFont(mfnt1);
+		hostb2.setFont(mfnt1);
+		waitb3.setFont(mfnt1);
+                adminb4.setFont(mfnt1);
+		ktcb5.setFont(mfnt1);   
+		busbyb6.setFont(mfnt1);
+                bkprc.setFont(mfnt1);
+                lgtb7.setFont(mfnt1);
+		htitle.setFont(mfnt);
+                home.setLayout(gb);
+                addHome(htitle,3,2,4,1);
+		addHome(hempt,1,4,1,1);
+		addHome(custb1,2,5,1,1);
+		addHome(hostb2,2,6,1,1);
+		addHome(waitb3,3,5,1,1);
+		addHome(adminb4,3,6,1,1);
+		addHome(ktcb5,4,5,1,1);
+		addHome(busbyb6,4,6,1,1);
+                addHome(bkprc,5,5,1,1);
+		addHome(lgtb7,5,6,1,1);
+				
+		//Initializing Login Form Objects
+		
+                uname=new JLabel("UserName");
+		pwd=new JLabel("Password");
+		neusr=new JLabel("New User ?");
+		uname.setFont(mfnt1);
+		pwd.setFont(mfnt1);
+		neusr.setFont(mfnt1);
+		ut1=new JTextField(10);
+		pt2=new JPasswordField(10);
+		b1=new JButton("Login");
+		b2=new JButton("Exit");
+		b3=new JButton("Create New Account");
+		b1.addActionListener(this);
+		b2.addActionListener(this);
+		b3.addActionListener(this);
+		lgn.setLayout(gb);
+		addLogin(l53,1,2,4,1);
+		addLogin(l54,1,3,1,1);
+		addLogin(uname,2,4,1,1);
+		addLogin(ut1,3,4,1,1);
+		addLogin(pwd,2,5,1,1);
+		addLogin(pt2,3,5,1,1);
+		addLogin(b1,3,6,1,1);
+		addLogin(b2,3,7,1,1);
+		addLogin(b3,3,8,1,1);
+
+		//Initializing Customer Form Objects
+                cname=new JLabel("Customer Name:");
+		phno=new JLabel("Customer Phone No:");
+		address=new JLabel("Customer Address");
+		lempt=new JLabel("                  ");
+		cname.setFont(mfnt1);
+		phno.setFont(mfnt1);
+		address.setFont(mfnt1);
+		ct1=new JTextField(20);
+		ct2=new JTextField(20);
+		taddr=new JTextArea(5,10);
+		loginbt=new JButton("Save Customer info");
+		backbt=new JButton("Back to Home");
+                exitbt=new JButton("Exit");
+		ct1.addActionListener(this);
+		ct2.addActionListener(this);
+		loginbt.addActionListener(this);
+		backbt.addActionListener(this);
+                exitbt.addActionListener(this);
+		cst.setLayout(gb);
+		addCustomer(l58,1,1,4,1);
+		addCustomer(l59,1,2,1,1);
+		addCustomer(cname,1,2,1,1);
+		addCustomer(ct1,2,2,2,1);
+		addCustomer(phno,1,3,1,1);
+		addCustomer(ct2,2,3,1,1);
+		addCustomer(address,1,4,1,1);
+		addCustomer(taddr,2,4,1,1);
+		addCustomer(lempt,2,8,1,1);
+		addCustomer(loginbt,2,9,1,1);
+		addCustomer(backbt,2,10,1,1);
+		addCustomer(exitbt,2,11,1,1);
+                
+		//Fot account creation
+               
+	
+	       actlb=new JLabel("Creating Login Information");
+                actlab1=new JLabel("                         ");
+                 actuname=new JLabel("UserName");
+		actpwd=new JLabel("Password");
+                actcfpwd=new JLabel("Confirm Password");
+                actlb.setFont(mfnt);
+		actuname.setFont(mfnt1);
+		actpwd.setFont(mfnt1);
+		actcfpwd.setFont(mfnt1);
+		actut1=new JTextField(20);
+		actpt1=new JPasswordField(20);
+                actpt2=new JPasswordField(20);
+		actb1=new JButton("Send");
+		actb2=new JButton("Back To Home");
+		actb3=new JButton("Exit");
+		actb1.addActionListener(this);
+		actb2.addActionListener(this);
+		actb3.addActionListener(this);
+		lgnact.setLayout(gb);
+		addLoginact(actlb,1,1,4,1);
+		addLoginact(actlab1,1,1,4,1);
+		addLoginact(actuname,2,3,4,1);
+		addLoginact(actut1,3,3,4,1);
+		addLoginact(actpwd,2,4,4,1);
+                addLoginact(actpt1,3,4,4,1);
+		addLoginact(actcfpwd,2,5,1,1);
+                addLoginact(actpt2,3,5,1,1);
+		addLoginact(actb1,1,7,1,1);
+		addLoginact(actb2,2,7,1,1);
+		addLoginact(actb3,3,7,1,1);
+
+              //seat arrangement form by host
+                slabel=new JLabel("Customer Seating Information");
+                slabel1=new JLabel("           ");
+                slabel.setFont(mfnt);
+                       stn=new JComboBox();
+                       stn.addItem("Select Seatno");
+			stn.addItem("1");
+			stn.addItem("2");
+                        stn.addItem("4");
+                        stn.addItem("5");
+                        stn.addItem("6");
+                         stn.addItem("7");
+			stn.addItem("8");
+                        stn.addItem("9");
+                        stn.addItem("10");
+                      nct=new JComboBox();
+                      nct.addItem("Select Porsons");
+			nct.addItem("1");
+			nct.addItem("2");
+                        nct.addItem("3");
+                        nct.addItem("4");
+			nct.addItem("4");
+                        nct.addItem("4");
+                        nct.addItem("4");
+                        nct.addItem("4");
+                        nct.addItem("4");
+                       ckinhtr=new JComboBox();
+                       ckinmin=new JComboBox();
+                       ckouthtr=new JComboBox();
+                       ckoutmin=new JComboBox();
+                                        
+                       
+		ckinhtr.addItem("Select In Time HR");
+			ckinhtr.addItem("1");
+                        ckinhtr.addItem("2");
+                        ckinhtr.addItem("3");
+                        ckinhtr.addItem("4");
+                        ckinhtr.addItem("5");
+                     ckinmin.addItem("Select In Time Min");   
+                        ckinmin.addItem("1");
+                        ckinmin.addItem("2");
+                        ckouthtr.addItem("3");
+                        ckoutmin.addItem("4");
+                                          
+			           
+		ckouthtr.addItem("Select Out Time HR");
+			ckouthtr.addItem("1");
+                        ckouthtr.addItem("2");
+                        ckouthtr.addItem("3");
+                        ckouthtr.addItem("4");
+                        ckouthtr.addItem("5");
+                        ckoutmin.addItem("Select Out Time Min");
+		        ckoutmin.addItem("1");
+                        ckoutmin.addItem("2");
+                        ckoutmin.addItem("3");
+                        ckoutmin.addItem("4");           
+                send=new JButton("Save Customer info");
+		cancel=new JButton("cancel");
+                back1=new JButton("Back");
+                send.addActionListener(this);
+		cancel.addActionListener(this);
+		back1.addActionListener(this);
+               	seat.setLayout(gb);
+                addSeats(slabel,1,1,4,1);
+		addSeats(slabel1,1,1,4,1);
+                addSeats(stn,1,2,2,1);
+		addSeats(nct,3,2,1,1);
+		addSeats(ckinhtr,1,3,1,1);
+                addSeats(ckinmin,2,3,1,1);
+                addSeats(ckouthtr,3,3,1,1);
+                addSeats(ckoutmin,4,3,1,1);
+		addSeats(send,1,5,1,1);
+		addSeats(cancel,2,5,1,1);
+		addSeats(back1,3,5,1,1);
+
+        //For viewfooddetails Form
+	
+                  String foodtab1[][]= {{"1","Vegmeals","100"},
+                    {"2","meals","80"},
+                    {"3","Biryani","150"},
+                    {"4","ChikenBiryani","200"}};
+		String foodtab2[] = {"Sno","ItemName","Price in RS"};
+		ftable = new JTable(foodtab1,foodtab2);  
+                  SelectItem= new JButton("Select Item");
+                  SelectItem.setFont(mfnt);
+                  addFoodTable(ftable);
+                  addFoodTable(SelectItem);
+                  SelectItem.addActionListener(this);
+                  
+
+                 //Initialising Booking Form Objects
+
+		//For Booking Form
+                  itemname=new JLabel("Itemname");
+                  quantty=new JLabel("Quantty");
+                     bitemname=new JComboBox();
+                     bitemname.addItem("select ItemName");
+			bitemname.addItem("VeBiryani");
+			bitemname.addItem("Meals");
+                        bitemname.addItem("Chiken Biryani");
+                        bitemname.addItem("Veg Noodles");
+		      bquantty=new JComboBox();
+                      bquantty.addItem("Select Quantity");
+			 bquantty.addItem("1");
+			 bquantty.addItem("2");
+                         bquantty.addItem("3");
+			 bquantty.addItem("4");
+                         bquantty.addItem("5");
+			 bquantty.addItem("6");
+                         bquantty.addItem("7");
+			 bquantty.addItem("8");
+                         
+                bknw=new JButton("CONFIRM BOOKING");
+		getcst=new JButton("Get Cost");
+		back3=new JButton("Back To Viewdetails");
+             	bitemname.addActionListener(this);
+		bquantty.addActionListener(this);
+                bknw.addActionListener(this);
+		getcst.addActionListener(this);
+		back3.addActionListener(this);
+		bkng.setLayout(gb);
+		addBooking(l60,1,1,4,1);
+		addBooking(l61,1,2,1,1);
+		addBooking(itemname,1,3,2,1);
+                addBooking(bitemname,3,3,1,1);
+                addBooking(quantty,1,4,1,1);
+                addBooking(bquantty,3,4,1,1);
+                addBooking(bknw,2,9,1,1);
+   		addBooking(getcst,2,10,1,1);
+		addBooking(back3,2,11,1,1);
+		
+		//Paracel Booking
+		plabel=new JLabel("Book Parcel Information");
+                plabel1=new JLabel("           ");
+                plabel.setFont(mfnt);
+                 pitemname=new JLabel("Itemname");
+                  pquantty=new JLabel("Quantty");
+                    pbitemname=new JComboBox();
+                    pbitemname.addItem("select ItemName");
+			pbitemname.addItem("VeBiryani");
+			pbitemname.addItem("Meals");
+                        pbitemname.addItem("Chiken Biryani");
+                       pbitemname.addItem("Veg Noodles");
+		      pbquantty=new JComboBox();
+                     pbquantty.addItem("Select Quantity");
+			pbquantty.addItem("1");
+			 pbquantty.addItem("2");
+                         pbquantty.addItem("3");
+			 pbquantty.addItem("4");
+                        pbquantty.addItem("5");
+			 pbquantty.addItem("6");
+                         pbquantty.addItem("7");
+			 pbquantty.addItem("8");
+                         
+                pbknw=new JButton("CONFIRM BOOKING");
+		pgetcst=new JButton("Get Cost");
+		pback3=new JButton("Back To Viewdetails");
+             	pbitemname.addActionListener(this);
+		pbquantty.addActionListener(this);
+                pbknw.addActionListener(this);
+		pgetcst.addActionListener(this);
+		pback3.addActionListener(this);
+		bookprc.setLayout(gb);
+	        addParcelBooking(plabel,1,1,2,1);
+                addParcelBooking(plabel1,1,2,1,1);
+                addParcelBooking(pitemname,1,3,2,1);
+                addParcelBooking(pbitemname,3,3,1,1);
+                addParcelBooking(pquantty,1,4,1,1);
+                addParcelBooking(pbquantty,3,4,1,1);
+                addParcelBooking(pbknw,2,6,1,1);
+   		addParcelBooking(pgetcst,2,7,1,1);
+		addParcelBooking(pback3,2,8,1,1);
+                //Forthanx panel
+		thnxlab=new JLabel(" Thanks For BooKing Visit Again");
+                thnxlab1=new JLabel("         ");
+                thnxlab.setFont(mfnt);
+                  thnxlab.setForeground(Color.GREEN);
+                  thnx.setLayout(gb);
+                addThnx(thnxlab,1,4,1,1);
+                addThnx(thnxlab1,1,5,1,1);
+                
+                //Adding Panels
+                rp.add("Home",home);
+                rp.add("Loginact",lgnact);
+                rp.add("Login",lgn);
+                rp.add("Parcel",bookprc);
+                rp.add("Booking",bkng);
+                rp.add("View",viewdet);
+                rp.add("Seats",seat);
+                rp.add("Customer",cst);
+                rp.add("NewPanl",rp1);
+                rp.add("Thank",thnx);
+               	getContentPane().add(rp);
+		setSize(1024,768);
+		show();
+		          
+                try
+		{
+                 
+		 Class.forName("org.apache.derby.jdbc.ClientDriver");
+	         con=DriverManager.getConnection("jdbc:derby://localhost:1527/SaiSreedb","Sai","sai123");
+			
+         	}
+		catch(Exception e)
+			{
+                        System.out.println("Error in Connection ");
+                        System.out.println(e);
+	
+		
+			}
+	
+        
+        }
+        public void mouseClicked(MouseEvent me)
+	{
+	
+        }
+        public void mousePressed(MouseEvent me)
+	{
+		
+        }
+        public void mouseReleased(MouseEvent me)
+	{
+		}
+        public void mouseEntered(MouseEvent me)
+	{
+		}
+        public void mouseExited(MouseEvent me)
+	{
+		}
+    //adding components to pannel    
+public void addHome(Component cc,int col,int r,int w,int h)
+	{
+		gbc.gridx=col;
+		gbc.gridy=r;
+		gbc.gridwidth=w;
+		gbc.gridheight=h;
+		gb.setConstraints(cc,gbc);
+		home.add(cc);
+	}
+public void addThnx(Component cc,int col,int r,int w,int h)
+	{
+		gbc.gridx=col;
+		gbc.gridy=r;
+		gbc.gridwidth=w;
+		gbc.gridheight=h;
+		gb.setConstraints(cc,gbc);
+		thnx.add(cc);
+	}
+
+public void addLogin(Component cc,int col,int r,int w,int h)
+	{
+		gbc.gridx=col;
+		gbc.gridy=r;
+		gbc.gridwidth=w;
+		gbc.gridheight=h;
+		gb.setConstraints(cc,gbc);
+		lgn.add(cc);
+	}
+public void addLoginact(Component cc,int col,int r,int w,int h)
+	{
+		gbc.gridx=col;
+		gbc.gridy=r;
+		gbc.gridwidth=w;
+		gbc.gridheight=h;
+		gb.setConstraints(cc,gbc);
+		lgnact.add(cc);
+	}
+
+public void addSeats(Component cc,int col,int r,int w,int h)
+	{
+		gbc.gridx=col;
+		gbc.gridy=r;
+		gbc.gridwidth=w;
+		gbc.gridheight=h;
+		gb.setConstraints(cc,gbc);
+		seat.add(cc);
+	}
+public void addFoodTable(Component cc)
+	{
+		gb.setConstraints(cc,gbc);
+		viewdet.add(cc);
+	}
+
+public void addCustomer(Component cc,int col,int r,int w,int h)
+	{
+		gbc.gridx=col;
+		gbc.gridy=r;
+		gbc.gridwidth=w;
+		gbc.gridheight=h;
+		gb.setConstraints(cc,gbc);
+		cst.add(cc);
+	}
+
+public void addParcelBooking(Component cc,int col,int r,int w,int h)
+	{
+		gbc.gridx=col;
+		gbc.gridy=r;
+		gbc.gridwidth=w;
+		gbc.gridheight=h;
+		gb.setConstraints(cc,gbc);
+		bookprc.add(cc);
+	}
+public void addBooking(Component cc,int col,int r,int w,int h)
+	{
+		gbc.gridx=col;
+		gbc.gridy=r;
+		gbc.gridwidth=w;
+		gbc.gridheight=h;
+		gb.setConstraints(cc,gbc);
+		bkng.add(cc);
+	}
+public void addBill(Component cc,int col,int r,int w,int h)
+	{
+		gbc.gridx=col;
+		gbc.gridy=r;
+		gbc.gridwidth=w;
+		gbc.gridheight=h;
+		gb.setConstraints(cc,gbc);
+		bill.add(cc);
+	}
+//Event Handlers
+
+public void actionPerformed(ActionEvent ee)
+	{//JButton custb1,hostb2,waitb3,adminb4,ktcb5,busbyb6,lgtb7,bkprc;
+		
+		if(ee.getSource()==custb1)
+                {
+                   cl.show(rp,"Customer");
+                    
+                }
+               if(ee.getSource()==hostb2)
+                {
+                   cl.show(rp,"Seats");
+                    
+                }
+              if(ee.getSource()==waitb3)
+                {
+                   cl.show(rp,"Login");
+                    
+                }
+               if(ee.getSource()==adminb4)
+                {
+                   cl.show(rp,"Login");
+                    
+                }
+               if(ee.getSource()==ktcb5)
+                {
+                   cl.show(rp,"Login");
+                    
+                }
+               if(ee.getSource()==busbyb6)
+                {
+                   cl.show(rp,"Login");
+                    
+                }
+               if(ee.getSource()==bkprc)
+                {
+                   cl.show(rp,"Parcel");
+                    
+                }
+			
+               if(ee.getSource()==lgtb7)
+                {
+                   
+                   System.exit(0);
+                 }
+        
+                 if(ee.getSource()==pbknw)
+			{
+			 cl.show(rp,"Thank");	
+			}
+         
+                  if(ee.getSource()==pgetcst)
+			{
+			cl.show(rp,"Home");	
+			}
+                   if(ee.getSource()==pback3)
+			{
+			cl.show(rp,"View");	
+			}
+         
+               if(ee.getSource()==actb1)
+			{
+			cl.show(rp,"Home");	
+			}
+          if(ee.getSource()==actb2)
+			{
+                            cl.show(rp,"Home");
+			}
+         if(ee.getSource()==actb3)
+			{
+			 System.exit(0);
+			}
+             
+         if(ee.getSource()==b1)
+		{
+			try
+			{		
+      ps=con.prepareStatement("Select * from login where name=? and passd=?");	
+				ps.setString(1,uname.getText());
+				ps.setString(2,pwd.getText());
+				rs=ps.executeQuery();
+				uname.setText("");
+				pwd.setText("");
+				rs.next();
+				uname.setText(rs.getString(1));
+				pwd.setText(rs.getString(2));
+                                
+				cl.show(rp1,"NewPanal");
+			}
+			catch(Exception e)
+			{
+				uname.setText("Illegal User Name or Password");
+				pwd.setText("");
+			}
+		}
+                if(ee.getSource()==b2)
+			{
+				System.exit(0);
+			}
+                if(ee.getSource()==b3)
+			{
+				cl.show(rp,"Loginact");
+			}
+	
+         if(ee.getSource()==loginbt)
+		{
+		cl.show(rp,"View");
+			
+		}
+                if(ee.getSource()==backbt)
+			{
+			cl.show(rp,"Home");	
+			}
+                if(ee.getSource()==exitbt)
+			{
+			System.exit(0);
+			}
+		
+		if(ee.getSource()==SelectItem)
+			{
+			cl.show(rp,"Booking");	
+			}	
+              		if(ee.getSource()==send)
+			{
+			cl.show(rp,"Home");	
+			}	
+            		if(ee.getSource()==cancel)
+			{
+			cl.show(rp,"Home");	
+			}	
+                         if(ee.getSource()==back1)
+			{
+			cl.show(rp,"Home");	
+			}	
+               
+                if(ee.getSource()==bknw)
+			{
+			cl.show(rp,"Home");	
+			}
+          if(ee.getSource()==getcst)
+			{
+			cl.show(rp,"Home");	
+			}
+         if(ee.getSource()==back3)
+			{
+			cl.show(rp,"Home");	
+			}
+       
+        }
+//Main class for execution
+public static void main(String a[])
+	{
+		
+              FinalRapp ht =new FinalRapp();
+                ht.setVisible(true);
+                ht.setSize(6000,9000);
+	}
+//EventHndlers for Window
+class MyWinLis extends WindowAdapter
+{
+public void windowClosing(WindowEvent w)
+{
+			FinalRapp ht;
+			ht=(FinalRapp)w.getSource();
+			ht.dispose();
+			System.exit(0);
+}
+}
+class MyFocusLis implements FocusListener
+	{
+int damt=0;		
+public void focusGained(FocusEvent e)
+		{
+		}
+public void focusLost(FocusEvent e)
+	{
+	}
+}
+class MyItemLis implements ItemListener
+{
+	public void itemStateChanged(ItemEvent ee)
+	{
+	}
+}
+}
+
+
